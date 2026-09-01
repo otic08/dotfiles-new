@@ -11,7 +11,8 @@ vim.pack.add({
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads})
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/nvim-lualine/lualine.nvim",
-    "https://github.com/karb94/neoscroll.nvim"
+    "https://github.com/karb94/neoscroll.nvim",
+    "https://github.com/stevearc/oil.nvim",
 })
 
 require("plugins.colorscheme")
@@ -21,6 +22,7 @@ require("plugins.lsp")
 require("plugins.dap")
 require("plugins.render-markdown")
 require("plugins.neoscroll")
+require("plugins.oil")
 -- Blink.cmp
 require('blink.cmp').setup({
 
@@ -35,11 +37,35 @@ require('blink.cmp').setup({
 	},
 })
 
--- Lua
+local function python_env()
+  if vim.bo.filetype ~= "python" then
+    return ""
+  end
+
+  local venv = vim.env.VIRTUAL_ENV
+  local venv_name = venv and vim.fn.fnamemodify(venv, ":t") or nil
+
+  local python = vim.g.python3_host_prog or vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+  local version = vim.fn.system(python .. " -V 2>&1"):gsub("Python ", ""):gsub("%s+", " "):gsub("^%s*", ""):gsub("%s*$", "")
+  if version == "" or version:match("not found") or version:match("No such") then
+    version = ""
+  end
+
+  if venv_name and version ~= "" then
+    return venv_name .. " (" .. version .. ")"
+  elseif venv_name then
+    return venv_name
+  elseif version ~= "" then
+    return version
+  end
+  return ""
+end
+
 require('lualine').setup {
   options = {
-    -- ... your lualine config
     theme = 'tokyonight'
-    -- ... your lualine config
+  },
+  sections = {
+    lualine_x = { python_env, 'encoding', 'fileformat', 'filetype' },
   }
 }

@@ -88,7 +88,7 @@ local function init_dap()
 
         cb({
             type = "executable",
-            command = "python3",
+            command = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/.venv/bin/python",
             args = { "-m", "debugpy.adapter" },
         })
     end
@@ -99,6 +99,49 @@ local function init_dap()
     end
 
     dap.configurations.python = {
+        {
+            type = "debugpy",
+            request = "launch",
+            name = "Launch calcularPeso.py",
+            program = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/calcularPeso.py",
+            pythonPath = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/.venv/bin/python",
+            args = {
+                "RAD",
+                "2023-04-15T20:20:00.000000-0500",
+                "2023-04-15T20:59:00.000000-0500",
+                "4",
+            },
+            env = {
+                DATA_HOME = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/data",
+            },
+            cwd = "/home/igp-otidgx/Projects/climadata/climadata-backend",
+            justMyCode = true,
+            redirectOutput = true,
+            console = "integratedTerminal",
+        },
+
+        {
+            type = "debugpy",
+            request = "launch",
+            name = "Launch crearZip.py",
+            program = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/crearZip.py",
+            pythonPath = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/.venv/bin/python",
+            args = {
+                "RAD",
+                "RAD_220315_220317",
+                "Reflectivity SNRg;Doppler Velocity VELg;Peak Width RMSg",
+                "2023-04-15T20:00:00.000000-0500",
+                "2023-04-15T20:20:00.000000-0500",
+            },
+            env = {
+                DATA_HOME = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/data",
+            },
+            cwd = "/home/igp-otidgx/Projects/climadata/climadata-backend",
+            justMyCode = true,
+            redirectOutput = true,
+            console = "integratedTerminal",
+        },
+
         {
             type = "debugpy",
             request = "attach",
