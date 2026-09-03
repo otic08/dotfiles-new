@@ -13,6 +13,7 @@ vim.pack.add({
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/karb94/neoscroll.nvim",
     "https://github.com/stevearc/oil.nvim",
+    "https://github.com/folke/snacks.nvim"
 })
 
 require("plugins.colorscheme")
@@ -23,8 +24,9 @@ require("plugins.dap")
 require("plugins.render-markdown")
 require("plugins.neoscroll")
 require("plugins.oil")
--- Blink.cmp
-require('blink.cmp').setup({
+require("plugins.snacks")
+    -- Blink.cmp
+    require('blink.cmp').setup({
 
     completion = {
         menu = { border = 'single' },

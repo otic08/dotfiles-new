@@ -75,3 +75,7 @@ vim.keymap.set("n", "<leader>u", function()
     vim.cmd.packadd("nvim.undotree")
     require("undotree").open()
 end, { desc = "Toggle Builtin Undotree" })
+
+-- Lsp related things
+vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format)
+
