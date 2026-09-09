@@ -1,4 +1,4 @@
-local opts = { noremap = true, silent = true }
+ local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 
@@ -78,4 +78,6 @@ end, { desc = "Toggle Builtin Undotree" })
 
 -- Lsp related things
 vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format)
+
+
 

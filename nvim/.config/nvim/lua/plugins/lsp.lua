@@ -18,13 +18,13 @@ vim.lsp.config("lua_ls", {
     },
 })
 
-vim.lsp.config("copilot", {
-    root_markers = {},
-})
+--vim.lsp.config("copilot", {
+--    root_markers = {},
+--})
 
 vim.lsp.enable({
     "lua_ls",
     "basedpyright",
     "clangd",
-    "copilot",
+--    "copilot",
 })

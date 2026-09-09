@@ -103,8 +103,8 @@ local function init_dap()
             type = "debugpy",
             request = "launch",
             name = "Launch calcularPeso.py",
-            program = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/calcularPeso.py",
-            pythonPath = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/.venv/bin/python",
+            program = "~/IGP/climadata/climadata-backend/backend/scripts/calcularPeso.py",
+            pythonPath = "~/IGP/climadata/climadata-backend/backend/scripts/.venv/bin/python",
             args = {
                 "RAD",
                 "2023-04-15T20:20:00.000000-0500",
@@ -112,10 +112,9 @@ local function init_dap()
                 "4",
             },
             env = {
-                DATA_HOME = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/data",
+                DATA_HOME = "~/IGP/climadata/climadata-backend/backend/data",
             },
-            cwd = "/home/igp-otidgx/Projects/climadata/climadata-backend",
-            justMyCode = true,
+            cwd = "~/IGP/climadata/climadata-backend",
             redirectOutput = true,
             console = "integratedTerminal",
         },

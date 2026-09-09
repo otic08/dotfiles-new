@@ -4,6 +4,7 @@ require("snacks").setup({
 	lazygit = { enabled = true },
 })
 
+
 vim.keymap.set("n", "<leader>ff", Snacks.picker.files)
 vim.keymap.set("n", "<leader>fg", Snacks.picker.grep)
 vim.keymap.set("n", "<leader>fb", Snacks.picker.buffers)
