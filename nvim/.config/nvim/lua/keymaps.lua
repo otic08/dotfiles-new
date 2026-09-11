@@ -43,6 +43,22 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>")     --go to next
 vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>")     --go to pre
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>") --open current tab in new tab
 
+-- pane/window navigation with leader + h/j/k/l
+vim.keymap.set("n", "<leader>h", "<C-w>h", { desc = "Move to left pane" })
+vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move to pane below" })
+vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move to pane above" })
+vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move to right pane" })
+
+-- buffer switching with leader + 1-9
+for i = 1, 9 do
+    vim.keymap.set("n", "<leader>" .. i, "<cmd>" .. i .. "b<CR>", { desc = "Switch to buffer " .. i })
+end
+
+-- buffer navigation
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+
 --split management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 -- split window vertically
