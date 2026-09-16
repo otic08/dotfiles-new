@@ -1,4 +1,5 @@
 vim.pack.add({
+    { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
     "https://github.com/folke/tokyonight.nvim",
     "https://github.com/nvim-mini/mini.nvim",
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main" },
@@ -14,7 +15,8 @@ vim.pack.add({
     "https://github.com/karb94/neoscroll.nvim",
     "https://github.com/stevearc/oil.nvim",
     "https://github.com/folke/snacks.nvim",
-    "https://github.com/rachartier/tiny-cmdline.nvim"
+    "https://github.com/rachartier/tiny-cmdline.nvim",
+    "https://github.com/folke/which-key.nvim"
 })
 
 require("plugins.colorscheme")
@@ -29,3 +31,4 @@ require("plugins.snacks")
 require("plugins.lualine")
 require("plugins.blink")
 require("plugins.tiny-cmdline")
+require("plugins.which-key")

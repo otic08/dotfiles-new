@@ -24,7 +24,7 @@ end
 
 require('lualine').setup {
   options = {
-    theme = 'tokyonight'
+    theme = 'tokyonight-night'
   },
   sections = {
     lualine_x = { python_env, 'encoding', 'fileformat', 'filetype' },

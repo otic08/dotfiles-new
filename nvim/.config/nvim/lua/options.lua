@@ -50,3 +50,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.hl.on_yank()
     end,
 })
+
+
+-- setting diagnostics
+local diagnostic_signs = {
+	[vim.diagnostic.severity.ERROR] = "☒",
+	[vim.diagnostic.severity.WARN] = "⚠",
+	[vim.diagnostic.severity.HINT] = "⚡",
+	[vim.diagnostic.severity.INFO] = "ⓘ",
+}
+vim.diagnostic.config({
+	signs = { text = diagnostic_signs },
+	virtual_text = true,
+	underline = true,
+	update_in_insert = false,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = true,
+	},
+})
