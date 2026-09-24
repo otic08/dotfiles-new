@@ -16,7 +16,8 @@ vim.pack.add({
     "https://github.com/stevearc/oil.nvim",
     "https://github.com/folke/snacks.nvim",
     "https://github.com/rachartier/tiny-cmdline.nvim",
-    "https://github.com/folke/which-key.nvim"
+    "https://github.com/folke/which-key.nvim",
+    "https://github.com/folke/sidekick.nvim"
 })
 
 require("plugins.colorscheme")
@@ -32,3 +33,4 @@ require("plugins.lualine")
 require("plugins.blink")
 require("plugins.tiny-cmdline")
 require("plugins.which-key")
+require("plugins.sidekick")
