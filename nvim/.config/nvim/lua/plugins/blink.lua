@@ -9,6 +9,8 @@ require('blink.cmp').setup({
 		enabled = true,
 		window = { border = 'single', show_documentation = true},
 	},
-})
+
+
+    })
 
 

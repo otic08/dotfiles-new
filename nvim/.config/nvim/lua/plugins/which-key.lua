@@ -1,4 +1,5 @@
 require("which-key").setup({
+    preset = "helix",
     -- LazyVim default group spec, adapted to this config's prefixes
     spec = {
         {
