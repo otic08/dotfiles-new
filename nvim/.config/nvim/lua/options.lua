@@ -16,7 +16,7 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
-vim.opt.undofile = true
+vim.opt.undofile = false
 
 -- search
 vim.opt.inccommand = "split"
@@ -24,6 +24,24 @@ vim.opt.inccommand = "split"
 -- UI
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
+vim.opt.winblend = 10
+vim.opt.pumblend = 10
+
+-- Transparency: make background transparent and survive colorscheme changes
+
+local function apply_transparency()
+    vim.cmd("highlight Normal guibg=none ctermbg=none")
+    vim.cmd("highlight NormalNC guibg=none ctermbg=none")
+    vim.cmd("highlight NonText guibg=none ctermbg=none")
+    vim.cmd("highlight SignColumn guibg=none ctermbg=none")
+    vim.cmd("highlight LineNr guibg=none ctermbg=none")
+end
+
+-- aapply_transparency()
+
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--    callback = apply_transparency,
+--})
 
 -- folding
 vim.o.foldenable = true

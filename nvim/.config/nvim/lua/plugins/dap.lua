@@ -88,7 +88,7 @@ local function init_dap()
 
         cb({
             type = "executable",
-            command = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/.venv/bin/python",
+            command = "~/IGP/climadata/climadata-backend/backend/scripts/.venv/bin/python",
             args = { "-m", "debugpy.adapter" },
         })
     end
@@ -107,6 +107,7 @@ local function init_dap()
             pythonPath = "~/IGP/climadata/climadata-backend/backend/scripts/.venv/bin/python",
             args = {
                 "RAD",
+                "mensual",
                 "2023-04-15T20:20:00.000000-0500",
                 "2023-04-15T20:59:00.000000-0500",
                 "4",
@@ -123,8 +124,8 @@ local function init_dap()
             type = "debugpy",
             request = "launch",
             name = "Launch crearZip.py",
-            program = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/crearZip.py",
-            pythonPath = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/scripts/.venv/bin/python",
+            program = "scripts/crearZip.py",
+            pythonPath = "~/IGP/climadata/climadata-backend/backend/scripts/.venv/bin/python",
             args = {
                 "RAD",
                 "RAD_220315_220317",
@@ -133,9 +134,9 @@ local function init_dap()
                 "2023-04-15T20:20:00.000000-0500",
             },
             env = {
-                DATA_HOME = "/home/igp-otidgx/Projects/climadata/climadata-backend/backend/data",
+                DATA_HOME = "~/IGP/climadata/climadata-backend/backend/data",
             },
-            cwd = "/home/igp-otidgx/Projects/climadata/climadata-backend",
+            cwd = "~/IGP/climadata/climadata-backend",
             justMyCode = true,
             redirectOutput = true,
             console = "integratedTerminal",

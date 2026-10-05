@@ -1,4 +1,16 @@
+local leader = vim.g.mapleader or '\\'
 require('blink.cmp').setup({
+
+    keymap = {
+        [leader .. 'k'] = {"show", "hide"},
+    },
+
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'org' },
+        providers = {
+            org = { name = "Org", module = "org.completion.blink" },
+        },
+    },
 
     completion = {
         menu = { border = 'single' },

@@ -1,10 +1,14 @@
 -- Catppuccin flavors: catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
-vim.cmd([[colorscheme tokyonight-night]])
+-- require("tokyonight").setup({
+--    transparent = true,
+-- })
 
---require("catppuccin").setup({
+-- vim.cmd([[colorscheme tokyonight-night]])
 
---    auto_integrations = true,
---})
+require("catppuccin").setup({
 
---vim.cmd.colorscheme "catppuccin"
+    auto_integrations = true,
+})
+
+vim.cmd.colorscheme "catppuccin"
