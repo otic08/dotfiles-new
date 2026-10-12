@@ -18,7 +18,8 @@ vim.pack.add({
     "https://github.com/rachartier/tiny-cmdline.nvim",
     "https://github.com/folke/which-key.nvim",
     "https://github.com/folke/sidekick.nvim",
-    "https://github.com/xheisenbugx/org.nvim"
+    "https://github.com/xheisenbugx/org.nvim",
+    "https://github.com/Aietes/esp32.nvim"
 })
 
 require("plugins.colorscheme")
@@ -36,3 +37,4 @@ require("plugins.tiny-cmdline")
 require("plugins.which-key")
 require("plugins.sidekick")
 require("plugins.org")
+require("plugins.esp32")

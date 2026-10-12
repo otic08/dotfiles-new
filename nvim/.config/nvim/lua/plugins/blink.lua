@@ -2,7 +2,9 @@ local leader = vim.g.mapleader or '\\'
 require('blink.cmp').setup({
 
     keymap = {
-        [leader .. 'k'] = {"show", "hide"},
+        preset = 'default',
+        [leader .. 'k'] = { 'show', 'hide'     },
+        ['<CR>']  = {  'select_and_accept',  'fallback'}
     },
 
     sources = {
