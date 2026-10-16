@@ -28,13 +28,11 @@ local function lsp_keymaps(bufnr, client)
         vim.keymap.set(mode, lhs, rhs, opts)
     end
 
-    map("n", "<leader>cl", function() Snacks.picker.lsp_config() end, { desc = "Lsp Info" })
-    map("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition", has = "definition" })
-    map("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "References", nowait = true })
-    map("n", "gI", function() Snacks.picker.lsp_implementations() end,
-        { desc = "Goto Implementation", has = "implementation" })
-    map("n", "gy", function() Snacks.picker.lsp_type_definitions() end,
-        { desc = "Goto T[y]pe Definition", has = "typeDefinition" })
+    map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
+    map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition", has = "definition" })
+    map("n", "gr", vim.lsp.buf.references, { desc = "References", nowait = true, has = "references" })
+    map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation", has = "implementation" })
+    map("n", "gy", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition", has = "typeDefinition" })
     map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration", has = "declaration" })
     map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
     map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help", has = "signatureHelp" })
@@ -42,23 +40,11 @@ local function lsp_keymaps(bufnr, client)
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", has = "codeAction" })
     map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens", has = "codeLens" })
     map("n", "<leader>cC", vim.lsp.codelens.refresh, { desc = "Refresh & Display Codelens", has = "codeLens" })
-    map("n", "<leader>cR", function() Snacks.rename.rename_file() end,
-        { desc = "Rename File", has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } })
     map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", has = "rename" })
     map("n", "<leader>cA", function()
         vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
     end, { desc = "Source Action", has = "codeAction" })
 
-    if Snacks.words and Snacks.words.is_enabled({ buf = bufnr }) then
-        map("n", "]]", function() Snacks.words.jump(vim.v.count1) end,
-            { desc = "Next Reference", has = "documentHighlight" })
-        map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end,
-            { desc = "Prev Reference", has = "documentHighlight" })
-        map({ "n", "t" }, "<a-n>", function() Snacks.words.jump(vim.v.count1, true) end,
-            { desc = "Next Reference", has = "documentHighlight" })
-        map({ "n", "t" }, "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end,
-            { desc = "Prev Reference", has = "documentHighlight" })
-    end
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -105,5 +91,6 @@ vim.lsp.enable({
     "lua_ls",
     "basedpyright",
     "clangd",
-    "copilot",
+    "ruff",
+ --   "copilot",
 })

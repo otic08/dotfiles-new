@@ -6,9 +6,8 @@
 
 -- vim.cmd([[colorscheme tokyonight-night]])
 
-require("catppuccin").setup({
-
-    auto_integrations = true,
-})
-
-vim.cmd.colorscheme "catppuccin"
+require('onedark').setup {
+    style = 'darker'
+}
+require('onedark').load()
+vim.cmd.colorscheme "onedark"

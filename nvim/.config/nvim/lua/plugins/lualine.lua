@@ -25,7 +25,7 @@ end
 
 require('lualine').setup {
     options = {
-        theme = 'catppuccin-nvim',
+        theme = 'auto',
     },
     sections = {
         lualine_x = { python_env, 'encoding', 'fileformat', 'filetype' },
