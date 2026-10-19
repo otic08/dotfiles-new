@@ -17,6 +17,7 @@ vim.pack.add({
     "https://github.com/folke/which-key.nvim",
     "https://github.com/xheisenbugx/org.nvim",
     "https://github.com/NeogitOrg/neogit",
+    "https://github.com/nvim-mini/mini.files",
 })
 
 require("plugins.colorscheme")
@@ -32,5 +33,6 @@ require("plugins.fzf-lua")
 require("plugins.codediff")
 require("plugins.gitsigns")
 require("plugins.neogit")
+require("plugins.mini-files")
 require("plugins.which-key")
 require("plugins.org")
