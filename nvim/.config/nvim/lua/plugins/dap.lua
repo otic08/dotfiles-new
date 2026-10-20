@@ -174,27 +174,41 @@ local function init_dap()
         },
     }
 
-    require("dap-view").setup({
-        auto_toggle = true,
-        winbar = {
-            controls = {
-                enabled = true,
+    require("nvim-dap-virtual-text").setup()
+
+    local dapui = require("dapui")
+    dapui.setup({
+        layouts = {
+            {
+                elements = {
+                    { id = "scopes", size = 0.4 },
+                    { id = "watches", size = 0.2 },
+                    { id = "breakpoints", size = 0.2 },
+                    { id = "stacks", size = 0.2 },
+                },
+                size = 0.4,
+                position = "right",
             },
-        },
-        windows = {
-            size = 0.4,
-            position = "right",
-        },
-        virtual_text = {
-            enabled = true,
-        },
-        keymaps = {
-            base = {
-                next_view = "<Tab>",
-                prev_view = "<S-Tab>",
+            {
+                elements = {
+                    { id = "repl", size = 0.5 },
+                    { id = "console", size = 0.5 },
+                },
+                size = 0.25,
+                position = "bottom",
             },
         },
     })
+
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+    end
 end
 
 init_dap()
@@ -228,12 +242,12 @@ vim.keymap.set("n", "<leader>dl", function() init_dap(); require("dap").run_last
 vim.keymap.set("n", "<leader>do", function() init_dap(); require("dap").step_out() end,                 { desc = "Step Out" })
 vim.keymap.set("n", "<leader>dO", function() init_dap(); require("dap").step_over() end,                { desc = "Step Over" })
 vim.keymap.set("n", "<leader>dP", function() init_dap(); require("dap").pause() end,                    { desc = "Pause" })
-vim.keymap.set("n", "<leader>dr", function() init_dap(); vim.cmd("DapViewJump repl") end,               { desc = "Toggle REPL" })
+vim.keymap.set("n", "<leader>dr", function() init_dap(); require("dapui").float_element("repl", { enter = true }) end, { desc = "Toggle REPL" })
 vim.keymap.set("n", "<leader>ds", function() init_dap(); require("dap").session() end,                  { desc = "Session" })
-vim.keymap.set("n", "<leader>dv", function() init_dap(); vim.cmd("DapViewJump scopes") end,            { desc = "DAP Scopes / Variables" })
-vim.keymap.set("n", "<leader>dT", function() init_dap(); vim.cmd("DapViewJump threads") end,           { desc = "DAP Threads / Call Stack" })
+vim.keymap.set("n", "<leader>dv", function() init_dap(); require("dapui").float_element("scopes", { enter = true }) end, { desc = "DAP Scopes / Variables" })
+vim.keymap.set("n", "<leader>dT", function() init_dap(); require("dapui").float_element("stacks", { enter = true }) end, { desc = "DAP Threads / Call Stack" })
 vim.keymap.set("n", "<leader>dt",  function() init_dap(); require("dap").terminate() end,                { desc = "Terminate" })
-vim.keymap.set("n", "<leader>dh", function() init_dap(); require("dap-view").hover() end,               { desc = "DAP Hover" })
-vim.keymap.set("n", "<leader>du", function() init_dap(); vim.cmd("DapViewToggle") end,                  { desc = "DAP View Toggle" })
-vim.keymap.set("x", "<leader>dw", function() vim.cmd("DapViewWatch") end,                               { desc = "DAP Watch Selection" })
+vim.keymap.set("n", "<leader>dh", function() init_dap(); require("dapui").eval() end,                   { desc = "DAP Hover" })
+vim.keymap.set("n", "<leader>du", function() init_dap(); require("dapui").toggle() end,                 { desc = "DAP View Toggle" })
+vim.keymap.set("x", "<leader>dw", function() require("dapui").eval() end,                               { desc = "DAP Watch Selection" })
 -- stylua: ignore end

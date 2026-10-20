@@ -6,8 +6,10 @@
 
 -- vim.cmd([[colorscheme tokyonight-night]])
 
-require('onedark').setup {
-    style = 'darker'
+require('catppuccin').setup {
+    flavour = "macchiato"
 }
-require('onedark').load()
-vim.cmd.colorscheme "onedark"
+
+
+vim.cmd.colorscheme "catppuccin-nvim"
+

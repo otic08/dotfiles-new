@@ -3,7 +3,9 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/mason-org/mason.nvim",
     { src = "https://github.com/mfussenegger/nvim-dap", version = "b516f20b" },
-    { src = "https://github.com/igorlfs/nvim-dap-view", version = vim.version.range("1.*") },
+    "https://github.com/nvim-neotest/nvim-nio",
+    "https://github.com/rcarriga/nvim-dap-ui",
+    "https://github.com/theHamsta/nvim-dap-virtual-text",
     "https://github.com/meanderingprogrammer/render-markdown.nvim",
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads})
     "https://github.com/nvim-tree/nvim-web-devicons",
@@ -18,6 +20,8 @@ vim.pack.add({
     "https://github.com/xheisenbugx/org.nvim",
     "https://github.com/NeogitOrg/neogit",
     "https://github.com/nvim-mini/mini.files",
+
+    {src =  "https://github.com/catppuccin/nvim", name  = "catppuccin"},
 })
 
 require("plugins.colorscheme")
