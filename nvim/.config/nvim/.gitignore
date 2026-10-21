@@ -1,0 +1,10 @@
+# VSCode
+.vscode/
+*.code-workspace
+
+# Neovim
+/.nvim.lua
+
+# Custom
+/old/
+/test*

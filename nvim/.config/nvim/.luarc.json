@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "runtime": {
+    "version": "LuaJIT",
+    "path": [
+      "lua/?.lua",
+      "lua/?/init.lua"
+    ]
+  },
+  "workspace": {
+    "library": [
+      "$VIMRUNTIME",
+      "${3rd}/luv/library",
+      "/usr/share/nvim/runtime/lua/",
+      "./lua",
+      "$HOME/.local/share/bob/nightly/share/nvim/runtime/lua/"
+    ],
+    "checkThirdParty": false
+  },
+  "diagnostics": {
+    "globals": [
+      "vim",
+      "Snacks",
+      "big",
+      "jit"
+    ],
+    "disable": [
+      "lowercase-global",
+      "undefined-global",
+      "undefined-doc-name",
+      "undefined-field",
+      "return-type-mismatch",
+      "missing-return",
+      "param-type-mismatch",
+      "cast-local-type",
+      "assign-type-mismatch"
+    ]
+  },
+  "format": {
+    "enable": true
+  },
+  "hint": {
+    "enable": true,
+    "arrayIndex": "Disable",
+    "await": true,
+    "paramName": "All",
+    "paramType": true,
+    "semicolon": "Disable",
+    "setType": true
+  }
+}

@@ -174,6 +174,64 @@ local function init_dap()
         },
     }
 
+    local cpp_dap_executable = vim.fn.stdpath("data")
+        .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7"
+
+    dap.adapters.cppdbg = {
+        id = "cppdbg",
+        type = "executable",
+        command = cpp_dap_executable,
+        enrich_config = function(config, on_config)
+            local enriched = vim.deepcopy(config)
+            enriched.MIMode = enriched.MIMode or (vim.fn.has("mac") == 1 and "lldb" or "gdb")
+            if enriched.MIMode == "gdb" and not enriched.setupCommands then
+                enriched.setupCommands = {
+                    { text = "-enable-pretty-printing", ignoreFailures = true },
+                }
+            end
+            on_config(enriched)
+        end,
+    }
+
+    local codelldb_root = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/"
+    local codelldb_path = codelldb_root .. "adapter/codelldb"
+
+    dap.adapters.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+            command = codelldb_path,
+            args = { "--port", "${port}" },
+        },
+    }
+
+    require("dap.ext.vscode").type_to_filetypes = {
+        cppdbg = { "c", "cpp" },
+        codelldb = { "c", "cpp", "rust" },
+    }
+
+    for _, lang in ipairs({ "c", "cpp", "rust" }) do
+        dap.configurations[lang] = {
+            {
+                name = "Launch file (codelldb)",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                end,
+                cwd = "${workspaceFolder}",
+                stopOnEntry = false,
+            },
+            {
+                name = "Attach to process (codelldb)",
+                type = "codelldb",
+                request = "attach",
+                pid = require("dap.utils").pick_process,
+                cwd = "${workspaceFolder}",
+            },
+        }
+    end
+
     require("nvim-dap-virtual-text").setup()
 
     local dapui = require("dapui")
