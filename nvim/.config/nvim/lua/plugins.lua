@@ -7,6 +7,7 @@ vim.pack.add({
     "https://github.com/rcarriga/nvim-dap-ui",
     "https://github.com/theHamsta/nvim-dap-virtual-text",
     "https://github.com/meanderingprogrammer/render-markdown.nvim",
+    "https://github.com/3rd/image.nvim",
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads})
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/ibhagwan/fzf-lua",
@@ -73,6 +74,7 @@ require("plugins.editing")
 require("plugins.navigation")
 require("plugins.ui")
 require("plugins.render-markdown")
+require("plugins.image")
 require("plugins.neoscroll")
 require("plugins.lualine")
 require("plugins.blink")

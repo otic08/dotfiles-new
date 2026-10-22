@@ -172,6 +172,22 @@ local function init_dap()
             justMyCode = false,
             redirectOutput = true,
         },
+        {
+            type = "debugpy",
+            request = "attach",
+            name = "CKAN Worker: Attach (scidata, debugpy)",
+            connect = { host = "127.0.0.1", port = 5680 },
+            pathMappings = function()
+                local root = ckan_project_root()
+                return {
+                    { localRoot = root .. "/src", remoteRoot = "/srv/app/src_extensions" },
+                    { localRoot = root .. "/ckan-core-ro", remoteRoot = "/srv/app/src/ckan" },
+                }
+            end,
+            justMyCode = false,
+            redirectOutput = true,
+        },
+
     }
 
     local cpp_dap_executable = vim.fn.stdpath("data")

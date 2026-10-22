@@ -10,6 +10,8 @@ require("mason-tool-installer").setup({
         "json-lsp",
         "marksman",
         "taplo",
+        "vtsls",
+        "eslint-lsp",
         -- DAPs
         "codelldb",
         "cpptools",
@@ -22,6 +24,8 @@ require("mason-tool-installer").setup({
         "shfmt",
         "shellcheck",
         "markdownlint-cli2",
+        "vue-language-server",
+        "dockerfile-language-server"
     },
     auto_update = false,
     run_on_start = true,
@@ -181,6 +185,34 @@ vim.lsp.config("lua_ls", {
     },
 })
 
+local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+local function mason_cmd(name)
+    local bin = mason_bin .. "/" .. name
+    return vim.uv.fs_stat(bin) and vim.fn.exepath(bin) or name
+end
+
+vim.lsp.config("vtsls", {
+    cmd = { mason_cmd("vtsls"), "--stdio" },
+})
+
+vim.lsp.config("eslint", {
+    settings = {
+        eslint = {
+            workingDirectories = { mode = "auto" },
+        },
+    },
+})
+
+vim.lsp.config("dockerfile-language-server", {
+    cmd = { mason_cmd("docker-langserver"), "--stdio" },
+    filetypes = { "dockerfile" },
+})
+
+vim.lsp.config("vue-language-server", {
+    cmd = { mason_cmd("vue-language-server"), "--stdio" },
+    filetypes = { "vue" },
+})
+
 --vim.lsp.config("copilot", {
 --    root_markers = {},
 --})
@@ -194,5 +226,9 @@ vim.lsp.enable({
     "marksman",
     "taplo",
     "ruff",
+    "vtsls",
+    "eslint",
+    "vue-language-server",
+    "dockerfile-language-server"
  --   "copilot",
 })
