@@ -1,5 +1,5 @@
 require("org").setup({
-    org_directory = "~/obsidian/gh/org/",
-    agenda_files = { "~/org/**/*.org" },
-    default_notes_file = "~/org/refile.org"
+    org_directory = "~/gibs-manager/",
+    agenda_files = { "~/gibs-manager/PNAIG/**/*.org" },
+    default_notes_file = "~/gibs-manager/refile.org"
 })

@@ -25,7 +25,8 @@ require("mason-tool-installer").setup({
         "shellcheck",
         "markdownlint-cli2",
         "vue-language-server",
-        "dockerfile-language-server"
+        "dockerfile-language-server",
+        "matlab-language-server"
     },
     auto_update = false,
     run_on_start = true,
@@ -213,6 +214,18 @@ vim.lsp.config("vue-language-server", {
     filetypes = { "vue" },
 })
 
+vim.lsp.config("matlab_ls", {
+    cmd = { mason_cmd("matlab-language-server"), "--stdio" },
+    filetypes = { "matlab" },
+    root_markers = { ".git" },
+    settings = {
+        MATLAB = {
+            installPath = "", -- set to your MATLAB install, e.g. "/usr/local/MATLAB/R2024b"
+            indexWorkspace = false,
+        },
+    },
+})
+
 --vim.lsp.config("copilot", {
 --    root_markers = {},
 --})
@@ -229,6 +242,7 @@ vim.lsp.enable({
     "vtsls",
     "eslint",
     "vue-language-server",
-    "dockerfile-language-server"
+    "dockerfile-language-server",
+    "matlab_ls"
  --   "copilot",
 })
