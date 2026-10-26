@@ -24,9 +24,12 @@ require("mason-tool-installer").setup({
         "shfmt",
         "shellcheck",
         "markdownlint-cli2",
+        "golangci-lint",
+        "goimports",
         "vue-language-server",
         "dockerfile-language-server",
-        "matlab-language-server"
+        "matlab-language-server",
+        "gopls"
     },
     auto_update = false,
     run_on_start = true,
@@ -230,6 +233,12 @@ vim.lsp.config("matlab_ls", {
 --    root_markers = {},
 --})
 
+vim.lsp.config("gopls", {
+    cmd = { mason_cmd("gopls") },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_markers = { "go.mod", "go.work", ".git" },
+})
+
 vim.lsp.enable({
     "lua_ls",
     "basedpyright",
@@ -243,6 +252,7 @@ vim.lsp.enable({
     "eslint",
     "vue-language-server",
     "dockerfile-language-server",
-    "matlab_ls"
+    "matlab_ls",
+    "gopls"
  --   "copilot",
 })

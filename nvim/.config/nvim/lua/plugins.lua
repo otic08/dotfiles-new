@@ -58,6 +58,8 @@ vim.pack.add({
     "https://github.com/HiPhish/rainbow-delimiters.nvim",
     "https://github.com/folke/todo-comments.nvim",
     "https://github.com/linrongbin16/gitlinker.nvim",
+    "https://github.com/olexsmir/gopher.nvim",
+    { src = "https://github.com/fredrikaverpil/godoc.nvim", version = vim.version.range("*") },
 })
 
 require("plugins.colorscheme")
@@ -87,3 +89,4 @@ require("plugins.which-key")
 require("plugins.org")
 require("plugins.neo-tree")
 require("plugins.barbecue")
+require("plugins.go")

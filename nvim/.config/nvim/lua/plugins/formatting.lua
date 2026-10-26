@@ -16,6 +16,7 @@ conform.setup({
         markdown = { "prettier" },
         yaml = { "prettier" },
         rust = { "rustfmt" },
+        go = { "gofmt", "goimports" },
         html = { "prettier" },
         css = { "prettier" },
         toml = { "taplo" },

@@ -23,11 +23,19 @@ local function python_env()
     return ""
 end
 
+local function encoding()
+    local result = vim.bo.fileencoding
+    if result ~= '' and vim.bo.bomb then
+        result = result .. ' [BOM]'
+    end
+    return result
+end
+
 require('lualine').setup {
     options = {
         theme = 'auto',
     },
     sections = {
-        lualine_x = { python_env, 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { python_env, encoding, 'fileformat', 'filetype' },
     }
 }
