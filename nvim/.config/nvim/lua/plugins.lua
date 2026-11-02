@@ -9,6 +9,7 @@ vim.pack.add({
     "https://github.com/meanderingprogrammer/render-markdown.nvim",
     "https://github.com/3rd/image.nvim",
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads})
+    "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/ibhagwan/fzf-lua",
     "https://github.com/nvim-lualine/lualine.nvim",
@@ -27,6 +28,7 @@ vim.pack.add({
     "https://github.com/SmiteshP/nvim-navic",
     "https://github.com/utilyre/barbecue.nvim",
     "https://github.com/nvimdev/lspsaga.nvim",
+    "https://github.com/iamkarasik/sonarqube.nvim",
     "https://github.com/mrcjkb/rustaceanvim",
     "https://github.com/saecki/crates.nvim",
     "https://github.com/p00f/clangd_extensions.nvim",
@@ -68,6 +70,7 @@ require("plugins.lspsaga")
 require("plugins.rust")
 require("plugins.clangd")
 require("plugins.lsp")
+require("plugins.sonarqube")
 require("plugins.formatting")
 require("plugins.dap")
 require("plugins.neotest")
