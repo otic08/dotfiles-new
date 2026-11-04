@@ -118,3 +118,13 @@
 ;; (add-to-list 'projectile-project-root-files-bottom-up "Cargo.toml"))
 (after! lsp-rust
   (setq lsp-rust-analyzer-cargo-watch-command "clippy"))
+
+(use-package! lsp-sonarlint
+  :after lsp-mode
+  :init
+  (setq lsp-sonarlint-modes-enabled
+        '(php-mode go-mode html-mode web-mode js-mode js2-mode rjsx-mode typescript-mode typescript-tsx-mode
+          python-mode python-ts-mode c-mode c++-mode c-or-c++-mode c-ts-mode c++-ts-mode c-or-c++-ts-mode
+          java-mode xml-mode nxml-mode))
+  :custom
+  (lsp-sonarlint-auto-download t))
