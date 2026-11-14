@@ -200,29 +200,3 @@ local renderOpts = {
 }
 
 require("render-markdown").setup(renderOpts)
-
-vim.keymap.set("n", "<leader>um", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle Render Markdown" })
-
--- Markdown preview use cli mdserve
-local mdserve_job = nil
-vim.keymap.set("n", "<leader>mp", function()
-	if mdserve_job then
-		vim.fn.jobstop(mdserve_job) -- stop previous mdserve
-	end
-
-	local file = vim.fn.expand("%:p")
-	if file == "" then
-		vim.notify("No file to preview", vim.log.levels.WARN)
-		return
-	end
-	mdserve_job = vim.fn.jobstart({ "mdserve", file, "--port", "1337", "--open" }, { detach = true })
-end, { desc = "Markdown preview (mdserve)" })
-
--- Clean up mdserve process when exiting nvim
-vim.api.nvim_create_autocmd("VimLeavePre", {
-	callback = function()
-		if mdserve_job then
-			vim.fn.jobstop(mdserve_job)
-		end
-	end,
-})

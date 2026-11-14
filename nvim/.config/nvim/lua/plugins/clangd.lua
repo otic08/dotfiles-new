@@ -87,12 +87,3 @@ require("cmake-tools").setup({
     },
     cmake_virtual_text_support = false,
 })
-
-vim.keymap.set("n", "<leader>cg", "<cmd>CMakeGenerate<cr>", { desc = "CMake Generate" })
-vim.keymap.set("n", "<leader>cb", "<cmd>wa<cr><cmd>CMakeBuild<cr>", { desc = "CMake Build" })
-vim.keymap.set("n", "<leader>ct", "<cmd>CMakeSelectBuildTarget<cr>", { desc = "CMake Select Build Target" })
-vim.keymap.set("n", "<leader>cT", "<cmd>CMakeSelectLaunchTarget<cr>", { desc = "CMake Select Launch Target" })
-vim.keymap.set("n", "<leader>cX", "<cmd>wa<cr><cmd>CMakeRun<cr>", { desc = "CMake Run" })
-vim.keymap.set("n", "<leader>cG", "<cmd>wa<cr><cmd>CMakeDebug<cr>", { desc = "CMake Debug" })
-vim.keymap.set("n", "<leader>cs", "<cmd>CMakeStopExecutor<cr>", { desc = "CMake Stop Executor" })
-vim.keymap.set("n", "<leader>cS", "<cmd>CMakeStopRunner<cr>", { desc = "CMake Stop Runner" })

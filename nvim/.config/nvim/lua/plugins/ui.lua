@@ -12,9 +12,6 @@ require("ufo").setup({
     end,
 })
 
-vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
-
 local no_foldcolumn = {
     startup = true,
     alpha = true,
@@ -95,15 +92,5 @@ require("todo-comments").setup({
     search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
     highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]] },
 })
-vim.keymap.set("n", "]t", function()
-    require("todo-comments").jump_next()
-end, { desc = "Next Todo Comment" })
-vim.keymap.set("n", "[t", function()
-    require("todo-comments").jump_prev()
-end, { desc = "Previous Todo Comment" })
-vim.keymap.set("n", "<leader>xt", "<cmd>Trouble todo toggle<cr>", { desc = "Todo (Trouble)" })
-
 -- Git links (gitlinker.nvim)
 require("gitlinker").setup({})
-vim.keymap.set({ "n", "v" }, "<leader>gy", "<cmd>GitLink<cr>", { desc = "Copy git remote link" })
-vim.keymap.set({ "n", "v" }, "<leader>gY", "<cmd>GitLink!<cr>", { desc = "Open git remote link in browser" })

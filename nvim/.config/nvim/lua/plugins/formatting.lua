@@ -25,18 +25,3 @@ conform.setup({
         prettier = { prepend_args = { "--ignore-path", ".prettierignore" } },
     },
 })
-
-local function format_buffer()
-    conform.format({
-        bufnr = vim.api.nvim_get_current_buf(),
-        lsp_format = "fallback",
-        timeout_ms = 500,
-    })
-end
-
-vim.keymap.set({ "n", "v" }, "<leader>f", format_buffer, { desc = "Format buffer (Conform)" })
-vim.keymap.set({ "n", "v" }, "<leader>fm", format_buffer, { desc = "Format buffer (Conform)" })
-vim.keymap.set({ "n", "v" }, "<leader>bf", function()
-    format_buffer()
-    vim.cmd("silent! write")
-end, { desc = "Format and save buffer" })

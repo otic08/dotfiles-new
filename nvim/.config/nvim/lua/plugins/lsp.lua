@@ -35,9 +35,6 @@ require("mason-tool-installer").setup({
     run_on_start = true,
 })
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
-vim.keymap.set("n", "df", "<cmd>Lspsaga show_line_diagnostics<cr>", { desc = "Show line diagnostics" })
-
 vim.diagnostic.config({ virtual_text = true })
 
 -- LazyVim-style LSP keymaps, attached per-buffer and gated on server capabilities
@@ -139,27 +136,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
     end,
 })
-
--- LazyVim-style diagnostic keymaps using lspsaga
-local diagnostic_goto = function(next, severity)
-    return function()
-        local opts = severity and { severity = severity } or nil
-        if next then
-            require("lspsaga.diagnostic"):goto_next(opts)
-        else
-            require("lspsaga.diagnostic"):goto_prev(opts)
-        end
-    end
-end
-vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<cr>", { desc = "Line Diagnostics" })
-vim.keymap.set("n", "<leader>cD", "<cmd>Lspsaga show_buf_diagnostics<cr>", { desc = "Buffer Diagnostics" })
-vim.keymap.set("n", "<leader>cw", "<cmd>Lspsaga show_workspace_diagnostics<cr>", { desc = "Workspace Diagnostics" })
-vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-vim.keymap.set("n", "]e", diagnostic_goto(true, vim.diagnostic.severity.ERROR), { desc = "Next Error" })
-vim.keymap.set("n", "[e", diagnostic_goto(false, vim.diagnostic.severity.ERROR), { desc = "Prev Error" })
-vim.keymap.set("n", "]w", diagnostic_goto(true, vim.diagnostic.severity.WARN), { desc = "Next Warning" })
-vim.keymap.set("n", "[w", diagnostic_goto(false, vim.diagnostic.severity.WARN), { desc = "Prev Warning" })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)

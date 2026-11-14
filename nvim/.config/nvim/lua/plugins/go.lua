@@ -2,7 +2,8 @@ require("gopher").setup({})
 
 require("godoc").setup({
     picker = {
-        type = "fzf_lua",
+        type = "telescope",
+        telescope = {},
     },
 })
 

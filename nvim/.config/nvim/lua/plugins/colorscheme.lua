@@ -25,7 +25,7 @@ require('catppuccin').setup {
       dap = true,
       dap_ui = true,
       which_key = false,
-      fzf = true,
+      telescope = true,
         }
   }
 

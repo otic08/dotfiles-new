@@ -11,7 +11,7 @@ vim.pack.add({
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads})
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/nvim-tree/nvim-web-devicons",
-    "https://github.com/ibhagwan/fzf-lua",
+    "https://github.com/nvim-telescope/telescope.nvim",
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/karb94/neoscroll.nvim",
     "https://github.com/rachartier/tiny-cmdline.nvim",
@@ -64,6 +64,7 @@ vim.pack.add({
     { src = "https://github.com/fredrikaverpil/godoc.nvim", version = vim.version.range("*") },
 })
 
+require("plugins.which-key")
 require("plugins.colorscheme")
 require("plugins.treesitter")
 require("plugins.lspsaga")
@@ -84,11 +85,10 @@ require("plugins.neoscroll")
 require("plugins.lualine")
 require("plugins.blink")
 require("plugins.tiny-cmdline")
-require("plugins.fzf-lua")
+require("plugins.telescope")
 require("plugins.codediff")
 require("plugins.gitsigns")
 require("plugins.neogit")
-require("plugins.which-key")
 require("plugins.org")
 require("plugins.neo-tree")
 require("plugins.barbecue")

@@ -8,7 +8,7 @@ require("which-key").setup({
             { "<leader>b", group = "buffer" },
             { "<leader>c", group = "code/cmake" },
             { "<leader>d", group = "debug/delete" },
-            { "<leader>f", group = "file/find" },
+            { "<leader>f", group = "Fuzzy Finder" },
             { "<leader>g", group = "git" },
             { "<leader>h", group = "harpoon/pane-left" },
             { "<leader>hr", group = "harpoon-remove" },
