@@ -23,7 +23,21 @@ local function diagnostic_goto(next, severity)
 end
 
 local function select_dap_config()
-    local configs = require("dap").configurations[vim.bo.filetype] or {}
+    local dap = require("dap")
+    local bufnr = vim.api.nvim_get_current_buf()
+    local configs = {}
+    local provider_keys = vim.tbl_keys(dap.providers.configs)
+    table.sort(provider_keys)
+    for _, provider in ipairs(provider_keys) do
+        local provider_configs = dap.providers.configs[provider](bufnr)
+        if vim.islist(provider_configs) then
+            vim.list_extend(configs, provider_configs)
+        end
+    end
+    if #configs == 0 then
+        vim.notify("No DAP configuration found", vim.log.levels.INFO)
+        return
+    end
     vim.ui.select(configs, {
         prompt = "Select DAP configuration",
         format_item = function(config)
@@ -31,9 +45,17 @@ local function select_dap_config()
         end,
     }, function(config)
         if config then
-            require("dap").run(config)
+            dap.run(config)
         end
     end)
+end
+
+local function codecompanion_inline()
+    if vim.fn.mode():match("^[vV\22]") then
+        vim.cmd("'<,'>CodeCompanion")
+    else
+        vim.cmd("CodeCompanion")
+    end
 end
 
 local mdserve_job = nil
@@ -140,6 +162,10 @@ local spec = {
         vim.cmd(("Neotree toggle %s"):format(vim.fn.fnameescape(dir)))
     end, desc = "File Explorer" },
 
+    -- fastapi
+    { "<leader>fa", function() require("fastapi-nvim").routes() end, desc = "FastAPI: browse routes" },
+    { "<leader>fA", function() require("fastapi-nvim").refresh() end, desc = "FastAPI: refresh routes" },
+
     -- git
     { "<leader>gg", function()
         local file = vim.api.nvim_buf_get_name(0)
@@ -157,11 +183,12 @@ local spec = {
     -- dap
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dB", function() require("dap").list_breakpoints() vim.cmd("copen") end, desc = "List Breakpoints" },
-    { "<leader>dc", function() require("dap").continue() end, desc = "Run/Continue" },
+    { "<leader>dc", function() require("autodap").continue() end, desc = "Run/Continue" },
     { "<leader>dA", select_dap_config, desc = "Select DAP Configuration" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
     { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>dI", "<cmd>DapImageView<cr>", desc = "View Variable as Image" },
     { "<leader>dj", function() require("dap").down() end, desc = "Down" },
     { "<leader>dk", function() require("dap").up() end, desc = "Up" },
     { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
@@ -236,6 +263,15 @@ local spec = {
 
     -- misc plugin maps
     { "<leader>Ag", function() require("neogen").generate() end, desc = "Generate Documentation (Neogen)" },
+
+    -- codecompanion
+    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "CodeCompanion: toggle chat" },
+    { "<leader>aA", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "CodeCompanion: add selection to chat" },
+    { "<leader>ai", codecompanion_inline, mode = { "n", "v" }, desc = "CodeCompanion: inline edit" },
+    { "<leader>ac", "<cmd>CodeCompanionCmd<cr>", mode = { "n", "v" }, desc = "CodeCompanion: command prompt" },
+    { "<leader>ar", "<cmd>CodeCompanionCodeReview<cr>", mode = "n", desc = "CodeCompanion: code review" },
+    { "<leader>ap", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "CodeCompanion: actions/prompts" },
+    { "<leader>aC", "<cmd>CodeCompanionCLI<cr>", mode = { "n", "v" }, desc = "CodeCompanion: CLI" },
     { "<leader>um", "<cmd>RenderMarkdown toggle<cr>", desc = "Toggle Render Markdown" },
     { "<leader>mp", function()
         if mdserve_job then

@@ -6,12 +6,16 @@ vim.pack.add({
     "https://github.com/nvim-neotest/nvim-nio",
     "https://github.com/rcarriga/nvim-dap-ui",
     "https://github.com/theHamsta/nvim-dap-virtual-text",
+    "https://github.com/JarnDev/autodap.nvim",
+    "https://gitlab.com/david_wright/image-view.nvim",
+    "https://gitlab.com/david_wright/nvim-dap-image",
     "https://github.com/meanderingprogrammer/render-markdown.nvim",
     "https://github.com/3rd/image.nvim",
     { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') }, -- pinning so rust binary dependency automatically downloads})
     "https://github.com/rafamadriz/friendly-snippets",
     "https://github.com/nvim-tree/nvim-web-devicons",
     "https://github.com/nvim-telescope/telescope.nvim",
+    "https://github.com/lucasdetoledo4/fastapi-nvim",
     "https://github.com/nvim-lualine/lualine.nvim",
     "https://github.com/karb94/neoscroll.nvim",
     "https://github.com/rachartier/tiny-cmdline.nvim",
@@ -62,6 +66,9 @@ vim.pack.add({
     "https://github.com/linrongbin16/gitlinker.nvim",
     "https://github.com/olexsmir/gopher.nvim",
     { src = "https://github.com/fredrikaverpil/godoc.nvim", version = vim.version.range("*") },
+    { src = "https://github.com/zbirenbaum/copilot.lua", version = "v3.2.4" },
+    "https://github.com/copilotlsp-nvim/copilot-lsp",
+    { src = "https://github.com/olimorris/codecompanion.nvim", version = "v20.2.0" },
 })
 
 require("plugins.which-key")
@@ -84,8 +91,11 @@ require("plugins.image")
 require("plugins.neoscroll")
 require("plugins.lualine")
 require("plugins.blink")
+require("plugins.copilot")
+require("plugins.codecompanion")
 require("plugins.tiny-cmdline")
 require("plugins.telescope")
+require("plugins.fastapi")
 require("plugins.codediff")
 require("plugins.gitsigns")
 require("plugins.neogit")

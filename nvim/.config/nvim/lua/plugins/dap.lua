@@ -274,6 +274,9 @@ local function init_dap()
         },
     })
 
+    require("nvim-dap-image").setup()
+    require("autodap").setup({ ui = false })
+
     dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
     end

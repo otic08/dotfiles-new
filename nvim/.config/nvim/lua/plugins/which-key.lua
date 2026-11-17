@@ -5,6 +5,7 @@ require("which-key").setup({
         {
             mode = { "n", "v" },
             { "<leader>A", group = "annotations" },
+            { "<leader>a", group = "ai" },
             { "<leader>b", group = "buffer" },
             { "<leader>c", group = "code/cmake" },
             { "<leader>d", group = "debug/delete" },

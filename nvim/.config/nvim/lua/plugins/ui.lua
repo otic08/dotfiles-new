@@ -89,8 +89,8 @@ require("rainbow-delimiters.setup").setup({
 
 -- Todo comments (todo-comments.nvim)
 require("todo-comments").setup({
-    search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
-    highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]] },
+    search = { pattern = [[\b(KEYWORDS)\b(\([^\)]*\))?:?]] },
+    highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?)%(:|\s|$)]] },
 })
 -- Git links (gitlinker.nvim)
 require("gitlinker").setup({})
