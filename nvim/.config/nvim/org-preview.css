@@ -1,0 +1,9 @@
+/* Styles the :Org preview page (Catppuccin Mocha) */
+body {
+  background: #1e1e2e;
+  color: #cdd6f4;
+}
+a { color: #89b4fa; }
+h1, h2, h3, h4, h5, h6 { color: #cba6f7; }
+code, pre { background: #313244; color: #cdd6f4; }
+table, th, td { border-color: #45475a; }
