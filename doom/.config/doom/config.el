@@ -26,7 +26,7 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14 :weight 'semi-light)
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14)
       doom-variable-pitch-font (font-spec :family "Iosevka Nerd Font" :size 14))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -38,8 +38,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-one)
-(setq doom-theme 'catppuccin)
-(setq catppuccin-flavor 'mocha)
+(setq doom-theme 'doom-dracula)
+;;(setq catppuccin-flavor 'mocha)
 ;; Specify both a dark and light theme, like so and Doom will choose which one
 ;; to load based on your system light/dark setting:
 ;;
@@ -50,7 +50,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; CKAN remote debugging (debugpy listening on 127.0.0.1:5678)
 (after! dape
@@ -119,6 +119,10 @@
 (after! lsp-rust
   (setq lsp-rust-analyzer-cargo-watch-command "clippy"))
 
+;; Must be set before lsp-pyright loads: its `lsp-dependency' declaration
+;; captures this value at load time, so `after!' would be too late.
+(setq lsp-pyright-langserver-command "basedpyright")
+
 (use-package! lsp-sonarlint
   :after lsp-mode
   :init
@@ -128,3 +132,33 @@
           java-mode xml-mode nxml-mode))
   :custom
   (lsp-sonarlint-auto-download t))
+
+;; LSP in org-babel src edit buffers (C-c ')
+(cl-defmacro lsp-org-babel-enable (lang)
+  "Support LANG in org source code block."
+  (cl-check-type lang stringp)
+  (let* ((edit-pre (intern (format "org-babel-edit-prep:%s" lang)))
+         (intern-pre (intern (format "lsp--%s" (symbol-name edit-pre)))))
+    `(progn
+       (defun ,intern-pre (info)
+         (let ((file-name (->> info caddr (alist-get :file))))
+           (unless file-name
+             (setq file-name (expand-file-name ".org-src-babel.py" default-directory)))
+           (setq buffer-file-name file-name)
+           (lsp-deferred)))
+       (if (fboundp ',edit-pre)
+           (advice-add ',edit-pre :after ',intern-pre)
+         (defun ,edit-pre (info)
+           (,intern-pre info))))))
+
+(after! org
+  (lsp-org-babel-enable "python"))
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))

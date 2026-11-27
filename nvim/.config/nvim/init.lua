@@ -1,5 +1,7 @@
 -- vim ui2
 
+vim.g.mapleader = " "
+
 require('vim._core.ui2').enable({
     enable = true,
     msg = {

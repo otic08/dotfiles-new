@@ -53,3 +53,5 @@
 ;; (unpin! t)
 (package! catppuccin-theme)
 (package! lsp-sonarlint)
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))

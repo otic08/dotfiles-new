@@ -1,7 +1,5 @@
 local wk = require("which-key")
 
-vim.g.mapleader = " "
-
 -- helpers shared by mappings below
 local function format_buffer()
     require("conform").format({
